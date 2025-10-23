@@ -4,6 +4,7 @@ from LEGO_HQEC.QuDec.OperatorProcessor import batch_convert_to_binary_vectors
 from LEGO_HQEC.QuDec.Mod2Algebra import mod2_gaussian_elimination
 from multiprocessing import Pool, current_process
 import psutil
+from tqdm import tqdm
 
 
 def filter_pauli_strings_by_erasure(pauli_strings, erasure_vector):
@@ -196,13 +197,18 @@ def calculate_recovery_rates_for_p_range(n, p_start, p_end, p_step, stabilizers,
     Returns:
     list of tuples: Each tuple contains a probability value and its corresponding recovery success rate.
     """
+
     recovery_rates = []
-    for p in np.arange(p_start, p_end + p_step, p_step):
-        print(f"Running at p = {p}")
-        recovery_rate = calculate_recovery_rate_multiprocessing(n=n, p=p, stabilizers=stabilizers,
-                                                                logical_operators=logical_operators,
-                                                                n_process=n_process,
-                                                                cpu_affinity_list=cpu_affinity_list)
+    p_values = np.arange(p_start, p_end + p_step, p_step)
+    for p in tqdm(p_values, desc="Calculating recovery rates"):
+        recovery_rate = calculate_recovery_rate_multiprocessing(
+            n=n,
+            p=p,
+            stabilizers=stabilizers,
+            logical_operators=logical_operators,
+            n_process=n_process,
+            cpu_affinity_list=cpu_affinity_list
+        )
         recovery_rates.append((p, recovery_rate))
 
     return recovery_rates

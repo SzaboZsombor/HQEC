@@ -1,3 +1,8 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'LEGO_HQEC'))
+
 from LEGO_HQEC.OperatorPush.Presets.HaPPY_code import setup_zero_rate_happy
 from LEGO_HQEC.OperatorPush.PushingToolbox import batch_push, batch_push_multiprocessing
 from LEGO_HQEC.QuDec.InputProcessor import extract_stabilizers_from_result_dict, extract_logicals_from_result_dict
