@@ -43,4 +43,7 @@ if __name__ == '__main__':
 
     # Calculate and print the weight (number of non-identity terms) of the minimal operator
     min_wt = calculate_pauli_weight(result)
+    with open('HaPPY_distance_output.txt', 'w') as f:
+        f.write(f"distance of the chosen operator = {min_wt}\n")
+    
     print(f"Distance of the chosen operator = {min_wt}")  # This is the distance for the Z logical operator
