@@ -3,7 +3,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'LEGO_HQEC'))
 
-from LEGO_HQEC.OperatorPush.Presets.HaPPY_code import setup_zero_rate_happy
+from LEGO_HQEC.OperatorPush.Presets.Holographic_Steane_code import setup_heptagon_zero_rate_steane
 from LEGO_HQEC.OperatorPush.PushingToolbox import batch_push, batch_push_multiprocessing
 from LEGO_HQEC.QuDec.InputProcessor import extract_stabilizers_from_result_dict, extract_logicals_from_result_dict
 from LEGO_HQEC.DIstanceFind.OperatorProcessor import (pauli_to_binary_vector, batch_convert_to_binary_vectors,
@@ -12,10 +12,10 @@ from LEGO_HQEC.DIstanceFind.DistanceFInder import minimize_logical_operator_weig
 
 if __name__ == '__main__':
     # Initialize parameters
-    R = 2  # Radius
+    R = 1  # Radius
 
-    # Set up the HaPPY code tensor network
-    tensor_list = setup_zero_rate_happy(R=R)
+    # Set up the Holographic Steane code tensor network
+    tensor_list = setup_heptagon_zero_rate_steane(R=R)
 
     # Perform parallel operator pushing operations on the tensor network
     results_dict = batch_push_multiprocessing(tensor_list)
